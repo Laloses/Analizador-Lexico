@@ -1,12 +1,14 @@
 +,-,*,/,<,=,d,l
-1,2,3,4,5,6,7
-Suma,Resta,Por,Entre,Menor,Menor Igual
+1,2,3,4,5,6,7,8,9	
+Suma,Resta,Por,Entre,Menor,Menor Igual,Digito, Letra
 0
-1,2,3,4,6,7
+1,2,3,4,6,7,8,9
 0 + 1
 0 - 2
 0 * 3
 0 / 4
 0 < 5
+0 d 8
+0 l 9
 5 @ 6
 5 = 7

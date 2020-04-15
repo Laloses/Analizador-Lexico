@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -39,7 +41,7 @@ public class ui extends javax.swing.JFrame {
     }
     
     public String AbrirArchivo(File Archivo){
-        String documento="";
+        String documento=" ";
         FileInputStream entrada;
         try{
             entrada =  new FileInputStream(Archivo);
@@ -75,7 +77,7 @@ public class ui extends javax.swing.JFrame {
         }
         
         //*********************************
-        //Estado inicial
+        //Estados nombre
         //En la tercera el nombre de los estados
         tmp = lineas[2].split(",");
         for(i=0; i<tmp.length; i++){
@@ -117,15 +119,45 @@ public class ui extends javax.swing.JFrame {
     
     public int esAlfabeto(char letra){
         int i;
+        Pattern dig= Pattern.compile("[0-9]");
+        Pattern let =Pattern.compile("[a-zA-Z]");
         for(i=0; i<alfabeto.size(); i++){
+            //Si letra es un digito
+            Matcher D = dig.matcher(letra+"");
+            Matcher L = let.matcher(letra+"");
+            
             if(alfabeto.get(i)==letra){
                 return i;
+            }
+            else
+            if( D.find()){
+                if(alfabeto.get(i)=='d'){
+                    return i;
+                }
+            }
+            else
+             if( L.find()){
+                if(alfabeto.get(i)=='l'){
+                    return i;
+                }
             }
         }
         return -1;
     }
     public int transision(int estadoA,char letra){
         int i;
+        Pattern dig= Pattern.compile("[0-9]");
+        Pattern let =Pattern.compile("[a-zA-Z]");
+        Matcher D = dig.matcher(letra+"");
+        Matcher L = let.matcher(letra+"");
+        
+        if( D.find()){
+            letra='d';
+        }
+        else
+            if( L.find()){
+                letra= 'l';
+            }
         for(i=0; i<estados.size(); i++){
             if(Integer.parseInt(tabla[i][0]) == estadoA && tabla[i][1].charAt(0) == letra){
                 return Integer.parseInt(tabla[i][2]);
